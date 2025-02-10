@@ -110,7 +110,7 @@ const Home = () => {
                 }}
               />
               <img
-                src="/my-portfolio/images/headshot.jpg"  // Update this line
+                src={import.meta.env.DEV ? '/images/headshot.jpg' : '/my-portfolio/images/headshot.jpg'}
                 alt="Ayla Topuz"
                 className="absolute inset-0 w-full h-full object-cover rounded-lg border-4 border-white shadow-xl"
               />

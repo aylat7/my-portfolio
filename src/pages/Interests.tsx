@@ -1,8 +1,9 @@
 import { motion, useInView } from 'framer-motion';
-import { Code, Palette, Piano, Mountain, Pencil } from 'lucide-react';
+import { Code, Palette, Piano, Mountain} from 'lucide-react';
 import { useRef } from 'react';
 import ScrollDownArrow from '../components/ScrollDownArrow';
 import { FaSnowboarding } from 'react-icons/fa';
+import { TbKarate } from 'react-icons/tb';
 
 const Interests = () => {
   const ref = useRef(null);
@@ -41,9 +42,9 @@ const Interests = () => {
     },
 
     {
-      icon: Pencil,
-      title: 'Drawing',
-      description: 'Sketching ideas, experimenting with different styles, and finding new ways to be creative.'
+      icon: TbKarate,
+      title: 'Karate',
+      description: 'Acheived a black belt status in Karate by the age of 13, and competed in multiple tournaments.'
     }
 
   ];
