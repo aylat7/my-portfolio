@@ -110,7 +110,7 @@ const Home = () => {
                 }}
               />
               <img
-                src="/public/images/headshot.jpg"
+                src="/my-portfolio/images/headshot.jpg"  // Update this line
                 alt="Ayla Topuz"
                 className="absolute inset-0 w-full h-full object-cover rounded-lg border-4 border-white shadow-xl"
               />
