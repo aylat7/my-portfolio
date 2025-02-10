@@ -46,7 +46,7 @@ const Projects = () => {
       description: "A modern, responsive portfolio website showcasing my projects, skills, and interests. Built with React and TypeScript, featuring smooth animations and a clean, professional design.",
       tags: ["React", "TypeScript", "Tailwind CSS"],
       image: "https://image8.photobiz.com/8585/28_20220117155144_6397158_large.jpg",
-      githubLink: "https://github.com/yourusername/2048-game",
+      githubLink: "https://github.com/aylat7/my-portfolio",
       features: [
         "Dynamic project showcase with filter options",
         "Smooth scroll animations using Framer Motion",
