@@ -55,16 +55,16 @@ const Projects = () => {
       ]
     },
     {
-      title: "Product Barcode Scanner App",
-      description: "An innovative mobile app that helps users identify Canadian-made products through barcode scanning. Integrated with API's to provide detailed product information and support local economy.",
-      tags: ["Swift", "React", "OpenFoodFacts API"],
-      image: "https://is1-ssl.mzstatic.com/image/thumb/Purple123/v4/5d/fd/b6/5dfdb69c-9c85-cb66-1766-8a01bcabade6/pr_source.png/230x0w.webp",
+      title: "Eh-Conomy",
+      description: "Desinged and implemented the front-end of a web app built at Hack Canada 2025 that connects users with local farms and farmers' markets based on product type and location. Aimed at supporting the Canadian economy during trade challenges.",
+      tags: ["Next.js", "React", "TailwindCSS", "TypeScript", "JavaScript", "Firebase", "Django", "Python"],
+      image: import.meta.env.DEV ? '/images/eh-conomy.png' : '/my-portfolio/images/eh-conomy.png',
       githubLink: "https://github.com/yourusername/2048-game",
       features: [
-        "Real-time barcode scanning with instant results",
-        "API integration for up-to-date product information",
-        "Local data caching for offline functionality",
-        "User-friendly UI with accessibility features"
+        "Search for local farms and farmers' markets by city/region and product type",
+        "Interactive Google Maps integration using API to show farm locations",
+        "Clean, responsive UI built with Tailwind CSS and Next.js",
+        "Promotes local, fresh food and supports Canadian economic resilience"
       ]
     },
     {

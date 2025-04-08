@@ -10,6 +10,7 @@ import LoadingScreen from './components/LoadingScreen';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+  const basename = import.meta.env.DEV ? '/' : '/my-portfolio';
 
   useEffect(() => {
     // Simulate a loading delay
@@ -25,7 +26,7 @@ const App = () => {
   }
 
   return (
-    <Router>
+    <Router basename={basename}>
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-green-200 to-green-100">
         <Navbar />
         <main>

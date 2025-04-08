@@ -100,7 +100,7 @@ const Navbar = () => {
             ))}
 
             <a
-              href="https://drive.google.com/file/d/13buyg-GUYy0_bZpY9_UbO6Or0OZ3Y7dO/view?usp=sharing"
+              href="https://drive.google.com/file/d/148ETMlNWoa9mdOelu7QNSSb2PnzBw6R4/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="px-3 py-2 rounded-md text-sm font-medium text-green-800 hover:text-green-600 transition-colors duration-300"
