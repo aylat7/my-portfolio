@@ -75,7 +75,7 @@ const Home = () => {
                 whileHover={{ scale: 1.15, rotate: -5 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                href="https://drive.google.com/file/d/13buyg-GUYy0_bZpY9_UbO6Or0OZ3Y7dO/view?usp=sharing"
+                href="https://drive.google.com/file/d/148ETMlNWoa9mdOelu7QNSSb2PnzBw6R4/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow"
