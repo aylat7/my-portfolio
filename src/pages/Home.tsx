@@ -40,7 +40,7 @@ const Home = () => {
               )}
             </h1>
             <p className="text-xl md:text-2xl text-green-700 mb-8">
-              Third year Computer Science student & Economics Minor @ WLU
+              Third Year Computer Science student & Economics Minor @ WLU
             </p>
             <p className="text-green-600 mb-8 text-lg">
               Hi, I'm Ayla - a developer who loves turning ideas into impactful applications. When I'm not coding, I'm probably hitting the slopes, playing piano, or going on hikes!
