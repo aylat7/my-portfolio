@@ -56,7 +56,7 @@ const Projects = () => {
     },
     {
       title: "Eh-Conomy",
-      description: "Desinged and implemented the front-end of a web app built at Hack Canada 2025 that connects users with local farms and farmers' markets based on product type and location. Aimed at supporting the Canadian economy during trade challenges.",
+      description: "Designed and implemented the front-end of a web app built at Hack Canada 2025 that connects users with local farms and farmers' markets based on product type and location. Aimed at supporting the Canadian economy during trade challenges.",
       tags: ["Next.js", "React", "TailwindCSS", "TypeScript", "JavaScript", "Firebase", "Django", "Python"],
       image: import.meta.env.DEV ? '/images/eh-conomy.png' : '/my-portfolio/images/eh-conomy.png',
       githubLink: "https://github.com/yourusername/2048-game",
@@ -81,7 +81,6 @@ const Projects = () => {
       ]
     }
   ];
-  
 
   return (
     <div className="min-h-screen pt-16">
@@ -101,9 +100,9 @@ const Projects = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }} //   transition speed
-                className="absolute right-28 top-[494px] bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50"
-                >
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="absolute right-28 top-[494px] bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50"
+            >
               <p className="text-sm font-medium whitespace-nowrap">
                 Click the GitHub icons to view source code!
               </p>

@@ -23,7 +23,6 @@ const Interests = () => {
       icon: Palette,
       title: 'UI/UX Design',
       description: 'Crafting user-centered designs with a focus on aesthetics, functionality, and seamless user experiences.'
-
     },
     {
       icon: Piano,
@@ -40,13 +39,11 @@ const Interests = () => {
       title: 'Snowboarding',
       description: 'Riding down slopes, working on new tricks, and enjoying the fresh mountain air.'
     },
-
     {
       icon: TbKarate,
       title: 'Karate',
-      description: 'Acheived a black belt status in Karate by the age of 13, and competed in multiple tournaments.'
+      description: 'Achieved a black belt status in Karate by the age of 13, and competed in multiple tournaments.'
     }
-
   ];
 
   return (

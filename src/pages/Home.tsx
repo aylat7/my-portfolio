@@ -34,7 +34,6 @@ const Home = () => {
                   ]}
                   wrapper="span"
                   speed={10}
-                  
                   repeat={0}
                 />
               )}
