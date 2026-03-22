@@ -1,68 +1,70 @@
-import { Github } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
 
 interface ProjectCardProps {
+  filename: string;
   title: string;
   description: string;
   tags: string[];
-  image: string;
   githubLink: string;
-  features: string[]; // Added features prop
+  stats?: string[];
 }
 
-const ProjectCard = ({ title, description, tags, image, githubLink, features }: ProjectCardProps) => {
+const ProjectCard = ({ title, description, tags, githubLink, stats }: ProjectCardProps) => {
   return (
-    <div className="group bg-white/80 backdrop-blur-sm rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden h-[400px] relative">
-      <div className="flex flex-col md:flex-row h-full">
-        {/* Image container */}
-        <div className="md:w-1/3 relative h-48 md:h-auto">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover object-center"
-          />
-        </div>
+    <motion.div
+      whileHover={{ y: -6, boxShadow: '0 16px 40px rgba(127,191,160,0.2)' }}
+      transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+      className="rounded-2xl overflow-hidden glass-card group"
+    >
+      <div className="p-6 flex flex-col h-full">
+        {/* Title */}
+        <h3 className="font-display text-xl font-bold text-pastel-forest mb-3 group-hover:text-pastel-accent transition-colors duration-200">
+          {title}
+        </h3>
 
-        {/* Content container */}
-        <div className="md:w-2/3 p-9 flex flex-col h-full">
-          {/* Top section - fixed at top */}
-          <div>
-            <h3 className="text-2xl font-bold text-green-800 mb-2">{title}</h3>
-            <p className="text-green-600 mb-4">{description}</p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+        {/* Description */}
+        <p className="font-sans text-pastel-muted text-sm leading-relaxed mb-4">
+          {description}
+        </p>
+
+        {/* Stats */}
+        {stats && stats.length > 0 && (
+          <div className="mb-4 space-y-1.5">
+            {stats.map((stat, i) => (
+              <p key={i} className="font-sans text-xs text-pastel-forest/80 flex items-start gap-2">
+                <span className="text-pastel-accent shrink-0 font-bold">•</span>
+                {stat}
+              </p>
+            ))}
           </div>
+        )}
 
-          {/* Middle section - bullet points */}
-          <div className="flex-1 flex flex-col justify-center mt-4">
-            <ul className="list-disc list-inside text-green-700 space-y-1">
-              {features.map((feature, index) => (
-                <li key={index} className="text-sm leading-relaxed">{feature}</li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Bottom section - GitHub link */}
-          <div className="flex justify-end mt-4">
-            <a
-              href={githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center p-2 rounded-full hover:bg-green-100 transition-colors"
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mb-5 mt-auto">
+          {tags.map((tag, i) => (
+            <span
+              key={i}
+              className="font-sans text-xs px-3 py-1 rounded-full bg-pastel-mint/50 text-pastel-forest font-semibold border border-pastel-mint"
             >
-              <Github className="w-6 h-6 text-green-600" />
-            </a>
-          </div>
+              {tag}
+            </span>
+          ))}
         </div>
+
+        {/* CTA */}
+        <a
+          href={githubLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pill-btn inline-flex items-center gap-2 w-fit text-sm"
+          aria-label={`View ${title} on GitHub`}
+        >
+          View Project
+          <ExternalLink size={14} />
+        </a>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

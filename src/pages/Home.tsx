@@ -1,131 +1,222 @@
-import { motion, useInView } from 'framer-motion';
-import { Github, Linkedin, FileText } from 'lucide-react';
-import { TypeAnimation } from 'react-type-animation';
 import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
 import ScrollDownArrow from '../components/ScrollDownArrow';
 
-
 const Home = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, {
-    amount: 0.2,
-    margin: "0px 0px -200px 0px",
-    once: false  // This ensures the animation triggers every time the element comes into view
-  });
+  const imgWrapperRef = useRef<HTMLDivElement>(null);
+
+  const headshotSrc = import.meta.env.DEV
+    ? '/images/headshot.jpg'
+    : '/my-portfolio/images/headshot.jpg';
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = imgWrapperRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    el.style.transform = `perspective(800px) rotateY(${dx * 10}deg) rotateX(${-dy * 10}deg)`;
+  };
+
+  const handleMouseLeave = () => {
+    const el = imgWrapperRef.current;
+    if (!el) return;
+    el.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg)';
+  };
 
   return (
-    <div className="min-h-screen pt-16">
-      <section id="home" className="max-w-6xl mx-auto px-4 py-20" ref={ref}>
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Left Column */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="flex-1"
-          >
-            <h1 className="text-5xl md:text-6xl font-bold text-green-800 mb-4">
-              {isInView && (
-                <TypeAnimation
-                  key={isInView ? "visible" : "hidden"} // Add this key prop to force remount
-                  sequence={[
-                    'Ayla Topuz',
-                    1000,
-                  ]}
-                  wrapper="span"
-                  speed={10}
-                  
-                  repeat={0}
-                />
-              )}
-            </h1>
-            <p className="text-xl md:text-2xl text-green-700 mb-8">
-              Third Year Computer Science student & Economics Minor @ WLU
-            </p>
-            <p className="text-green-600 mb-8 text-lg">
-              Hi, I'm Ayla - a developer who loves turning ideas into impactful applications. When I'm not coding, I'm probably hitting the slopes, playing piano, or going on hikes!
-              <br />
-              <br />
-              Feel free to contact me! I'm always open to new opportunities and collaborations.
-            </p>
-            <div className="flex gap-4">
-              <motion.a
-                whileHover={{ scale: 1.15, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    <div className="relative min-h-screen flex items-center overflow-hidden bg-pastel-bg">
+      {/* Background gradient blobs */}
+      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+        <div
+          className="absolute top-[-10%] left-[-10%] w-[55vw] h-[55vw] rounded-full animate-blob-pulse"
+          style={{
+            background: 'radial-gradient(circle, rgba(178,223,200,0.45) 0%, rgba(178,223,200,0) 70%)',
+            filter: 'blur(40px)',
+          }}
+        />
+        <div
+          className="absolute bottom-[-15%] right-[-10%] w-[50vw] h-[50vw] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(127,191,160,0.3) 0%, rgba(127,191,160,0) 70%)',
+            filter: 'blur(50px)',
+            animationDelay: '2s',
+          }}
+        />
+        <div
+          className="absolute top-[40%] left-[35%] w-[30vw] h-[30vw] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(168,216,188,0.25) 0%, rgba(168,216,188,0) 70%)',
+            filter: 'blur(35px)',
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-24">
+        <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16">
+
+          {/* Left: Text */}
+          <div className="flex-1 flex flex-col items-start">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="font-sans text-pastel-muted text-sm font-semibold tracking-widest uppercase mb-4"
+            >
+              Hi, I'm
+            </motion.p>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.7, ease: 'easeOut' }}
+              className="font-display font-bold text-pastel-forest leading-none mb-6"
+              style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)' }}
+            >
+              Ayla Topuz
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="font-sans text-pastel-accent text-xl md:text-2xl font-semibold mb-8 h-8 flex items-center"
+            >
+              <TypeAnimation
+                sequence={[
+                  'CS Student.',
+                  1800,
+                  'Builder.',
+                  1800,
+                  'Community Leader.',
+                  1800,
+                  'Creative.',
+                  1800,
+                  'Problem Solver.',
+                  1800,
+                ]}
+                wrapper="span"
+                speed={55}
+                repeat={Infinity}
+              />
+            </motion.div>
+
+            {/* CTA buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.85, duration: 0.6 }}
+              className="flex flex-wrap gap-4 mb-10"
+            >
+              <button
+                onClick={() => scrollTo('projects')}
+                className="pill-btn"
+                aria-label="View my work"
+              >
+                View My Work
+              </button>
+              <button
+                onClick={() => scrollTo('contact')}
+                className="pill-btn-outline"
+                aria-label="Contact me"
+              >
+                Get in Touch
+              </button>
+            </motion.div>
+
+            {/* Social links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
+              className="flex gap-6 font-sans text-sm text-pastel-muted font-semibold mb-10"
+            >
+              <a
                 href="https://github.com/aylat7"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                className="hover:text-pastel-forest transition-colors duration-200"
               >
-                <Github className="text-green-600" size={24} />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.15, rotate: -5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                GitHub
+              </a>
+              <span className="text-pastel-mint">•</span>
+              <a
                 href="https://www.linkedin.com/in/ayla-topuz-31313a29a/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                className="hover:text-pastel-forest transition-colors duration-200"
               >
-                <Linkedin className="text-green-600" size={24} />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.15, rotate: -5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                LinkedIn
+              </a>
+              <span className="text-pastel-mint">•</span>
+              <a
                 href="https://drive.google.com/file/d/148ETMlNWoa9mdOelu7QNSSb2PnzBw6R4/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                className="hover:text-pastel-forest transition-colors duration-200"
               >
-                <FileText className="text-green-600" size={24} />
-              </motion.a>
-            </div>
-          </motion.div>
+                Resume
+              </a>
+            </motion.div>
 
-          {/* Right Column */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="flex-1 flex justify-center"
-          >
-            <motion.div 
-              className="relative w-64 h-64 md:w-80 md:h-80"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.4, duration: 0.6 }}
             >
-              <motion.div 
-                className="absolute inset-0 bg-green-200 rounded-lg"
-                animate={{ 
-                  y: [0, -10, 0],
-                  rotate: [0, 5, 0, -5, 0]
+              <ScrollDownArrow targetId="projects" text="scroll to explore" />
+            </motion.div>
+          </div>
+
+          {/* Right: Headshot */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
+            className="flex-shrink-0 flex items-center justify-center"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ display: 'flex' }}
+            >
+              <div
+                ref={imgWrapperRef}
+                style={{
+                  transition: 'transform 0.15s ease',
+                  borderRadius: '2rem',
+                  padding: '6px',
+                  background: 'linear-gradient(135deg, #b2dfc8 0%, #7fbfa0 50%, #b2dfc8 100%)',
+                  boxShadow: '0 20px 60px rgba(127,191,160,0.35)',
                 }}
-                transition={{ 
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              <img
-                src={import.meta.env.DEV ? '/images/headshot.jpg' : '/my-portfolio/images/headshot.jpg'}
-                alt="Ayla Topuz"
-                className="absolute inset-0 w-full h-full object-cover rounded-lg border-4 border-white shadow-xl"
-              />
+              >
+                <img
+                  src={headshotSrc}
+                  alt="Ayla Topuz"
+                  className="block object-cover"
+                  style={{
+                    width: 'clamp(220px, 28vw, 360px)',
+                    height: 'clamp(220px, 28vw, 360px)',
+                    borderRadius: '1.65rem',
+                  }}
+                  loading="eager"
+                />
+              </div>
             </motion.div>
           </motion.div>
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-        >
-          <ScrollDownArrow targetId="projects" text="See my projects below!" />
-        </motion.div>
-      </section>
+        </div>
+      </div>
     </div>
   );
 };

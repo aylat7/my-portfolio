@@ -1,147 +1,100 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import ScrollDownArrow from '../components/ScrollDownArrow';
-import { AnimatePresence } from 'framer-motion';
+
+const projects = [
+  {
+    filename: 'nba_playoff_predictor.py',
+    title: 'NBA Playoff Predictor',
+    description:
+      'End-to-end ML pipeline predicting whether the Toronto Raptors will make the NBA playoffs using 20+ years of historical data and live NBA API stats.',
+    tags: ['Python', 'scikit-learn', 'pandas', 'NBA API', 'matplotlib', 'seaborn', 'joblib'],
+    githubLink: 'https://github.com/aylat7/nba_playoff_predictor',
+    stats: [
+      '92.8% cross-validation accuracy (±1.1%)',
+      '96.7% test accuracy',
+      '100% historical accuracy across 22 Raptors seasons',
+      '96.3% current chance of making 2025-26 playoffs',
+    ],
+  },
+  {
+    filename: 'eh_conomy/',
+    title: 'Eh-Conomy',
+    description:
+      'Location-based platform connecting consumers with nearby farmers to encourage local shopping and support the domestic economy during the tariff war. Built at HackCanada 2025.',
+    tags: ['React', 'Next.js', 'Node.js', 'TailwindCSS', 'Google Maps API', 'GitHub Actions', 'Vercel'],
+    githubLink: 'https://github.com/aylat7',
+    stats: [],
+  },
+  {
+    filename: 'library_db.sql',
+    title: 'Library Database Management System',
+    description:
+      'Comprehensive library system using SQL and PhpMyAdmin with member and book management, loan processing, stored procedures, triggers, and scheduled events for automated operations.',
+    tags: ['SQL', 'PhpMyAdmin'],
+    githubLink: 'https://github.com/aylat7',
+    stats: [],
+  },
+  {
+    filename: 'wordrush.swift',
+    title: 'WordRush',
+    description:
+      'Real-time multiplayer Wordle clone iOS app. Race against friends to guess the word first with live state sync.',
+    tags: ['Swift', 'Firebase'],
+    githubLink: 'https://github.com/aylat7',
+    stats: [],
+  },
+];
 
 const Projects = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { 
-    amount: 0.2,
-    margin: "0px 0px -200px 0px"
-  });
-
-  const [showMessage, setShowMessage] = useState(false);
-
-  useEffect(() => {
-    let showTimer: NodeJS.Timeout | undefined;
-    let hideTimer: NodeJS.Timeout | undefined;
-
-    if (isInView) {
-      // Delay showing the message by 3 seconds
-      showTimer = setTimeout(() => {
-        setShowMessage(true);
-        
-        // Hide the message after 5 seconds
-        hideTimer = setTimeout(() => {
-          setShowMessage(false);
-        }, 6000);
-      }, 1000);
-    } else {
-      // Hide message immediately when leaving view
-      setShowMessage(false);
-      clearTimeout(showTimer);
-      clearTimeout(hideTimer);
-    }
-
-    return () => {
-      clearTimeout(showTimer);
-      clearTimeout(hideTimer);
-    };
-  }, [isInView]);
-
-  const projects = [
-    {
-      title: "Portfolio Website",
-      description: "A modern, responsive portfolio website showcasing my projects, skills, and interests. Built with React and TypeScript, featuring smooth animations and a clean, professional design.",
-      tags: ["React", "TypeScript", "Tailwind CSS"],
-      image: "https://image8.photobiz.com/8585/28_20220117155144_6397158_large.jpg",
-      githubLink: "https://github.com/aylat7/my-portfolio",
-      features: [
-        "Dynamic project showcase with filter options",
-        "Smooth scroll animations using Framer Motion",
-        "Fully responsive design for mobile and desktop",
-        "Integrated GitHub repositories with live previews"
-      ]
-    },
-    {
-      title: "Eh-Conomy",
-      description: "Desinged and implemented the front-end of a web app built at Hack Canada 2025 that connects users with local farms and farmers' markets based on product type and location. Aimed at supporting the Canadian economy during trade challenges.",
-      tags: ["Next.js", "React", "TailwindCSS", "TypeScript", "JavaScript", "Firebase", "Django", "Python"],
-      image: import.meta.env.DEV ? '/images/eh-conomy.png' : '/my-portfolio/images/eh-conomy.png',
-      githubLink: "https://github.com/yourusername/2048-game",
-      features: [
-        "Search for local farms and farmers' markets by city/region and product type",
-        "Interactive Google Maps integration using API to show farm locations",
-        "Clean, responsive UI built with Tailwind CSS and Next.js",
-        "Promotes local, fresh food and supports Canadian economic resilience"
-      ]
-    },
-    {
-      title: "2048 Game",
-      description: "A web-based implementation of the popular 2048 puzzle game. Players combine numbered tiles strategically to reach the 2048 tile, featuring smooth animations and responsive design.",
-      tags: ["HTML", "CSS", "JavaScript"],
-      image: "https://images.crazygames.com/games/2048/cover_16x9-1707828856995.png?auto=format,compress&q=75&cs=strip",
-      githubLink: "https://github.com/aylat7/2048-Game",
-      features: [
-        "High-score tracking as the game goes on",
-        "Responsive layout for mobile and desktop play",
-        "Smooth Tile Animations for an engaging user experience",
-        "Optimized Game Logic for smooth performance for efficient tile merging"
-      ]
-    }
-  ];
-  
+  const isInView = useInView(ref, { amount: 0.1, once: false });
 
   return (
-    <div className="min-h-screen pt-16">
-      <section id="projects" className="max-w-6xl mx-auto px-4 py-20 relative" ref={ref}>
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+    <div className="min-h-screen bg-pastel-bg">
+      <section id="projects" className="max-w-6xl mx-auto px-4 py-24" ref={ref}>
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -16 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold text-green-800 mb-12 text-center"
+          className="mb-14"
         >
-          Projects
-        </motion.h2>
+          <p className="font-sans text-pastel-muted text-xs font-bold tracking-[0.25em] uppercase mb-3">
+            Selected Work
+          </p>
+          <h2 className="font-display text-4xl font-bold text-pastel-forest">
+            Projects
+          </h2>
+          <div className="mt-3 h-1 w-12 bg-pastel-accent rounded-full" />
+        </motion.div>
 
-        <AnimatePresence>
-          {showMessage && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }} //   transition speed
-                className="absolute right-28 top-[494px] bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50"
-                >
-              <p className="text-sm font-medium whitespace-nowrap">
-                Click the GitHub icons to view source code!
-              </p>
-              {/* Arrow pointing to GitHub icon */}
-              <div 
-                className="absolute w-3 h-3 bg-green-600 transform rotate-45"
-                style={{
-                  top: '50%',
-                  right: '-6px',
-                  transform: 'translateY(-50%) rotate(45deg)'
-                }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <div className="grid grid-cols-1 gap-8">
+        {/* Card grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ 
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{
                 delay: index * 0.1,
                 duration: 0.5,
-                ease: "easeOut"
+                ease: 'easeOut',
               }}
             >
               <ProjectCard {...project} />
             </motion.div>
           ))}
         </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-12"
         >
-          <ScrollDownArrow targetId="skills" text="Check out my skills!" />
+          <ScrollDownArrow targetId="skills" text="check out my skills" />
         </motion.div>
       </section>
     </div>
