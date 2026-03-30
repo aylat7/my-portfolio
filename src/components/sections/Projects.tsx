@@ -9,6 +9,7 @@ interface Project {
   stats?: { label: string; value: string }[];
   tags: string[];
   repo?: string;
+  demo?: string;
   hackathon?: string;
 }
 
@@ -28,6 +29,20 @@ const projects: Project[] = [
     repo: 'https://github.com/aylat7/nba_playoff_predictor',
   },
   {
+    title: 'Medical Image Segmentation',
+    filename: 'segmentation_unet.py',
+    date: 'Mar 2026',
+    description:
+      'Trained and compared U-Net and Attention U-Net architectures on the 2018 Data Science Bowl dataset (670+ microscopy images). Built a modular evaluation pipeline with instance-level TP/FP/FN analysis and watershed post-processing. Deployed an interactive Gradio demo on Hugging Face Spaces with dual model switching and real-time segmentation overlay.',
+    stats: [
+      { label: 'Dice Score', value: '0.91' },
+      { label: 'IoU', value: '0.84' },
+    ],
+    tags: ['Python', 'PyTorch', 'Gradio', 'scikit-image'],
+    repo: 'https://github.com/aylat7/nuclei-segmentation-ML',
+    demo: 'https://huggingface.co/spaces/aylat7/nuclei-segmentation-ML',
+  },
+  {
     title: 'Eh-Conomy',
     filename: 'eh-conomy.tsx',
     date: 'Mar 2025',
@@ -43,13 +58,6 @@ const projects: Project[] = [
     description:
       'Comprehensive library system with member/book management, loan processing, stored procedures, triggers, and scheduled events. Integrated role-based access controls for librarians and administrators.',
     tags: ['SQL', 'PhpMyAdmin'],
-  },
-  {
-    title: 'WordRush',
-    filename: 'WordRush.swift',
-    description:
-      'Real-time multiplayer Wordle clone iOS app with live game rooms and competitive play.',
-    tags: ['Swift', 'Firebase'],
   },
 ];
 
@@ -121,19 +129,34 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         {/* CTA */}
-        {project.repo && (
-          <a
-            href={project.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-mono text-sm text-forest-300 hover:text-forest-200 transition-colors"
-          >
-            <span className="text-cream-muted">{'>'}</span> view_source.sh
-            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
-        )}
+        <div className="flex flex-wrap gap-4">
+          {project.repo && (
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-mono text-sm text-forest-300 hover:text-forest-200 transition-colors"
+            >
+              <span className="text-cream-muted">{'>'}</span> view_source.sh
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          )}
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-mono text-sm text-forest-300 hover:text-forest-200 transition-colors"
+            >
+              <span className="text-cream-muted">{'>'}</span> live_demo.sh
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          )}
+        </div>
       </div>
     </motion.div>
   );
